@@ -1,0 +1,105 @@
+﻿create database surveyEvent char set utf8;
+use surveyEvent;
+
+drop database surveyEvent;
+
+create table users(
+id varchar(50) PRIMARY KEY,
+pw varchar(50),
+save int
+);
+
+create table surveys(
+id varchar(50) PRIMARY KEY,
+writer varchar(50),
+connect varchar(15),
+title varchar(50),
+pName varchar(50),
+pPic varchar(100),
+endDate Date,
+qCnt int,
+FOREIGN KEY (writer) REFERENCES users(id)
+);
+
+create table eventInfo(
+id varchar(50),
+winner varchar(50),
+FOREIGN KEY (id) REFERENCES surveys(id),
+FOREIGN KEY (winner) REFERENCES users(id)
+);
+
+create table buyProduct(
+id varchar(50) PRIMARY KEY,
+clientid varchar(50),
+productName varchar(50),
+productPic varchar(100),
+FOREIGN KEY (clientid) REFERENCES users(id)
+);
+
+show tables;
+
+update users set save=10000 where id="tuna";
+
+select * from users;
+select * from surveys;
+select * from eventInfo;
+select * from buyProduct;
+
+drop table buyProduct;
+drop table eventInfo;
+drop table surveys;
+drop table users;
+
+insert into users(id,pw,save) values("tuna","ckacl",10000);
+insert into users(id,pw,save) values("poo","vn",10);
+insert into users(id,pw,save) values("sieun","sisi",10);
+insert into users(id,pw,save) values("aa","bb",10);
+insert into users(id,pw,save) values("test","test",10);
+insert into surveys(id,writer,connect,title,pName,pPic,endDate,qCnt) values("1536050900563","tuna","010-2551-8557","급식 관련 설문","세븐일레븐 허쉬 초콜릿우유","resources/tuna/1.jpg","2018-09-06",2);
+insert into surveys(id,writer,connect,title,pName,pPic,endDate,qCnt) values("1536050990540","tuna","010-6842-5745","'설문, 선물' 사용자 설문조사","스타벅스 아이스 카페라떼 Tall","resources/tuna/2.jpg","2018-09-03",3);
+insert into surveys(id,writer,connect,title,pName,pPic,endDate,qCnt) values("1536101488027", "aa", "010-5555-4444", "OO마트 배달서비스 설문 조사", "gs25 초코렛과자", "resources/aa/4.png", "2018-09-11", 2);
+insert into surveys(id,writer,connect,title,pName,pPic,endDate,qCnt) values("1536101880001", "poo", "010-3758-4411", "창업 분야 설문", "수제고구마피자+콜라1.25L", "resources/aa/7.jpg", "2018-09-07", 2);
+insert into surveys(id,writer,connect,title,pName,pPic,endDate,qCnt) values("1536101765261", "sieun", "010-6767-8989", "잠버릇에 관한 설문", "스타벅스 아이스 카페 아메리카노 Tall", "resources/aa/5.jpg", "2018-09-12", 4);
+
+create table q1536050900563(
+	num int auto_increment primary key,
+    userId varchar(50),
+    q1 int,
+    q2 int,
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+create table q1536050990540(
+	num int auto_increment primary key,
+    userId varchar(50),
+    q1 int,
+    q2 int,
+    q3 int,
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+create table q1536101488027(
+	num int auto_increment primary key,
+    userId varchar(50),
+    q1 int,
+    q2 int,
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+create table q1536101880001(
+	num int auto_increment primary key,
+    userId varchar(50),
+    q1 int,
+    q2 int,
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+create table q1536101765261(
+	num int auto_increment primary key,
+    userId varchar(50),
+    q1 int,
+    q2 int,
+    q3 int,
+    q4 int,
+    FOREIGN KEY (userId) REFERENCES users(id)
+);
+insert into q1536050990540(num,userId,q1,q2,q3) values(0,"poo",1,1,5);
+insert into q1536050990540(num,userId,q1,q2,q3) values(0,"sieun",2,2,5);
+insert into q1536050990540(num,userId,q1,q2,q3) values(0,"aa",1,1,1);
+insert into q1536101880001(num,userId,q1,q2) values(0,"test",1,2);
